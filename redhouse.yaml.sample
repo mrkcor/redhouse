@@ -1,0 +1,18 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 2
+
+authorize: ~/.ssh/id_rsa.pub
+
+folders:
+    - map: ~/code
+      to: /home/vagrant/code
+
+sites:
+    - map: redhouse.test
+      to: /home/vagrant/code/public
+      proxy_port: 3000
+
+databases:
+    - redhouse
