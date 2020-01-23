@@ -1,6 +1,6 @@
 class Redhouse
   def self.configure(config, settings)
-    config.vm.box = 'redhouse'
+    config.vm.box = 'mrkcor/redhouse'
     config.ssh.forward_agent = true
     config.vm.network :private_network, ip: settings['ip'] ||= '192.168.10.42'
 
@@ -95,6 +95,9 @@ class Redhouse
               site['port'] ||= port, # $3
           ]
         end
+
+        site['ruby'] ||= '2.6.5'
+        config.vm.provision 'shell', path: script_dir + '/install-ruby.sh', args: [site['ruby']]
 
         config.vm.provision 'shell' do |s|
           s.path = script_dir + "/hosts-add.sh"
