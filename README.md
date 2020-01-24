@@ -5,7 +5,9 @@ box.
 
 The Redhouse box is a Vagrant box setup to develop Ruby projects based on the 
 [Laravel Homestead](https://github.com/laravel/homestead) project which fulfills that 
-role for PHP projects. 
+role for PHP projects.
+
+The base box for this project is built with https://github.com/mrkcor/redhouse-packer
 
 Many thanks to everyone who has contributed to Vagrant, Homestead and the related 
 projects to make the lives of many developers a great deal easier!
@@ -47,3 +49,10 @@ Once the vagrant box is up and running again you can ssh into it with 'vagrant s
 to the directory to run the Rails project with 'bin/rails s -p 3001'. Provided that you 
 added the domain in your local hosts file to point to the IP address of the vagrant box (also
 specified in redhouse.yaml) you can visit https://redhouse.dev to access your Rails project.
+
+## Q&A
+
+### Why the name Redhouse?
+
+Rubies are red, Laravel named its project homestead which made me think of house and made me think of Jimi Hendrix's song "Red house"... which led to Redhouse.
+
