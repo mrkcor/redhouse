@@ -54,5 +54,10 @@ specified in redhouse.yaml) you can visit https://redhouse.dev to access your Ra
 
 ### Why the name Redhouse?
 
-Rubies are red, Laravel named its project homestead which made me think of house and made me think of Jimi Hendrix's song "Red house"... which led to Redhouse.
+Rubies are red, Laravel named its Vagrant setup project Homestead which made me think of a house 
+and that made me think of Jimi Hendrix's song "Red house"... which led to Redhouse.
+
+### How can I contribute?
+
+Feel free to put an issue on GitHub issues and/or offer a pull request.
 
