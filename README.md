@@ -23,6 +23,11 @@ Once the provisioning is complete there will be a .pem file in the redhouse dire
 browser as a trusted root certificate you will not get warnings for the certificates
 generated for the sites that you specified in redhouse.yaml.
 
+MariaDB and PostgreSQL are installed, any databases mentioned in the 'databases' 
+section of the redhouse.yaml file will be created for you in both of those. The
+database username is 'redhouse' and the password is 'overyonder'. For both you
+will need to connect to host 127.0.0.1 on the vagrant instance.
+
 ## Running Rails projects
 
 Define the shared folder, site and databases in redhouse.yaml:
