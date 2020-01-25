@@ -26,7 +26,7 @@ BASE_CNF="
 
     name_opt      = ca_default
     cert_opt      = ca_default
-    default_days  = 1825
+    default_days  = 800
     preserve      = no
     policy        = policy_loose
 
