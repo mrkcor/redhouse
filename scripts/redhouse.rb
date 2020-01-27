@@ -58,6 +58,11 @@ class Redhouse
       end
     end
 
+    # Configure shell
+    config.vm.provision 'shell' do |s|
+      s.path = script_dir + '/shell.sh'
+    end
+
     # Clear any Homestead sites and insert markers in /etc/hosts
     config.vm.provision 'shell' do |s|
       s.path = script_dir + '/hosts-reset.sh'
