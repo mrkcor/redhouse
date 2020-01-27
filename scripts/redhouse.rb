@@ -13,6 +13,7 @@ class Redhouse
       vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
       vb.customize ['modifyvm', :id, '--natdnshostresolver1', settings['natdnshostresolver'] ||= 'on']
       vb.customize ['modifyvm', :id, '--ostype', 'Ubuntu_64']
+      vb.customize ['guestproperty', 'set', :id, '--timesync-threshold', 5000]
     end
 
     if settings.include? 'authorize'
