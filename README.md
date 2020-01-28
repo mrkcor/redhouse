@@ -62,6 +62,10 @@ specified in redhouse.yaml) you can visit https://redhouse.dev to access your Ra
 Rubies are red, Laravel named its Vagrant setup project Homestead which made me think of a house 
 and that made me think of Jimi Hendrix's song "Red house"... which led to Redhouse.
 
+### Watchers on file changes are not picking changes on the shared folders. What gives?
+
+Shared filesystems such as VirtualBox's shared folders only trigger filesystem events in the box when the files are changed there. I recently found https://github.com/mhallin/vagrant-notify-forwarder, that's a vagrant plugin that forwards filesystem events from the host to the guest and it seems to work pretty well for me so far.
+
 ### How can I contribute?
 
 Feel free to put an issue on GitHub issues and/or offer a pull request.
