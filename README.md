@@ -31,6 +31,22 @@ redhouse.yaml file will be created within it for you.
 To connect to PostgreSQL no password is needed as long as you are connecting through the
 unix socket or localhost. The roles 'vagrant' and 'root' exist for you to connect through.
 
+## What's installed in the default box?
+
+Here's a list of things:
+
+* PostgreSQL 12
+* NodeJS 12
+* rbenv + ruby-build and Ruby 2.6.5
+* nginx
+* SQLite
+* InfluxDB
+* wkhtmltopdf
+* rsvg-convert
+* ripgrep
+
+If you want to know exactly what's inside you should look inside https://github.com/mrkcor/redhouse-packer
+
 ## Running Rails projects
 
 Define the shared folder, site and databases in redhouse.yaml:
