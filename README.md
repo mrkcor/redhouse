@@ -83,9 +83,9 @@ and that made me think of Jimi Hendrix's song "Red house"... which led to Redhou
 
 ### Watchers on file changes are not picking changes on the shared folders. What gives?
 
-Shared filesystems such as VirtualBox's shared folders only trigger filesystem events in the box when the files are changed there. I recently found https://github.com/mhallin/vagrant-notify-forwarder, that's a vagrant plugin that forwards filesystem events from the host to the guest and it seems to work pretty well for me so far.
+Shared filesystems such as VirtualBox's shared folders only trigger filesystem events in the box when the files are changed there. I recently found https://github.com/mhallin/vagrant-notify-forwarder, that's a vagrant plugin that forwards filesystem events from the host to the guest and it works pretty well (although sometimes it can be a bit quirky).
 
-If you use an editor like vim or emacs inside your VM you won't run into this problem ;)
+Another way around this is to edit the files from within the VM, there are various ways to do this (vim or emacs from the shell inside the box or editing over SFTP or something like that).
 
 ### How can I contribute?
 
