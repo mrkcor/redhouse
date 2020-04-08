@@ -25,9 +25,12 @@ class Redhouse
       end
     end
 
+    default_folder_options = settings['folder_defaults'] || {}
+
     # Register All Of The Configured Shared Folders
     if settings.include? 'folders'
       settings['folders'].each do |folder|
+        folder = default_folder_options.merge(folder)
         if File.exist? File.expand_path(folder['map'])
           mount_opts = []
 
@@ -53,7 +56,7 @@ class Redhouse
           end
         else
           config.vm.provision 'shell' do |s|
-            s.inline = ">&2 echo \"Unable to mount one of your folders. Please check your folders in Homestead.yaml\""
+            s.inline = ">&2 echo \"Unable to mount one of your folders. Please check your folders in redhouse.yaml\""
           end
         end
       end
@@ -64,7 +67,7 @@ class Redhouse
       s.path = script_dir + '/shell.sh'
     end
 
-    # Clear any Homestead sites and insert markers in /etc/hosts
+    # Clear any redhouse sites and insert markers in /etc/hosts
     config.vm.provision 'shell' do |s|
       s.path = script_dir + '/hosts-reset.sh'
     end
