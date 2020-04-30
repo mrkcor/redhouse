@@ -29,7 +29,7 @@ class Redhouse
     if settings.include? 'projects'
       settings['projects'].each do |project|
         config.vm.provision 'shell' do |s|
-          s.inline = "mkdir -p $(dirname #{project['folder']}) && cd $(dirname #{project['folder']}) && if [ ! -d #{project['folder']}; then su -c 'git clone #{project['git']}' vagrant; fi"
+          s.inline = "mkdir -p $(dirname #{project['folder']}) && chown -R vagrant:vagrant $(dirname #{project['folder']}) && cd $(dirname #{project['folder']}) && if [ ! -d #{project['folder']} ]; then su -c 'git clone #{project['git']}' vagrant; fi"
         end
       end
     end
