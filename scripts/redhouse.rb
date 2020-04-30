@@ -1,6 +1,7 @@
 class Redhouse
   def self.configure(config, settings)
     config.vm.box = 'mrkcor/redhouse'
+    config.vm.hostname = settings['hostname'] || 'redhouse'
     config.ssh.forward_agent = true
     config.vm.network :private_network, ip: settings['ip'] ||= '192.168.10.42'
 
@@ -150,12 +151,6 @@ class Redhouse
     if settings.has_key?('databases')
       # Check which databases are enabled
       settings['databases'].each do |db|
-        config.vm.provision 'shell' do |s|
-          s.name = 'Creating MySQL Database: ' + db
-          s.path = script_dir + '/create-mysql.sh'
-          s.args = [db]
-        end
-
         config.vm.provision 'shell' do |s|
           s.name = 'Creating Postgres Database: ' + db
           s.path = script_dir + '/create-postgres.sh'
