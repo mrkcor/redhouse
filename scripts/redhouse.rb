@@ -25,6 +25,14 @@ class Redhouse
       end
     end
 
+    if settings.include? 'projects'
+      settings['projects'].each do |project|
+        config.vm.provision 'shell' do |s|
+          s.inline = "mkdir -p $(dirname #{project['folder']}) && cd $(dirname #{project['folder']}) && if [ ! -d #{project['folder']}; then su -c 'git clone #{project['git']}' vagrant; fi"
+        end
+      end
+    end
+
     default_folder_options = settings['folder_defaults'] || {}
 
     # Register All Of The Configured Shared Folders
