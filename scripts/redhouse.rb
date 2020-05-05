@@ -27,6 +27,10 @@ class Redhouse
     end
 
     if settings.include? 'projects'
+      config.vm.provision 'shell' do |s|
+        s.inline = "su -c 'ssh-keyscan github.com >> ~/.ssh/known_hosts' vagrant"
+      end
+
       settings['projects'].each do |project|
         config.vm.provision 'shell' do |s|
           s.inline = "mkdir -p $(dirname #{project['folder']}) && chown -R vagrant:vagrant $(dirname #{project['folder']}) && cd $(dirname #{project['folder']}) && if [ ! -d #{project['folder']} ]; then su -c 'git clone #{project['git']}' vagrant; fi"
