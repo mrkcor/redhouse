@@ -26,14 +26,34 @@ class Redhouse
       end
     end
 
+    if settings.include? 'key_scan'
+      settings['key_scan'].each do |hostname|
+        config.vm.provision 'shell' do |s|
+          s.inline = "su -c 'ssh-keyscan #{hostname} >> ~/.ssh/known_hosts' vagrant"
+        end
+      end
+    end
+
     if settings.include? 'projects'
-      config.vm.provision 'shell' do |s|
-        s.inline = "su -c 'ssh-keyscan github.com >> ~/.ssh/known_hosts' vagrant"
+      projects_root = nil
+      if settings.include? 'projects_root'
+        projects_root = settings['projects_root']
+        projects_root = "#{projects_root}/" unless projects_root.end_with?('/')
       end
 
+      sources = settings['sources'] || {}
+
       settings['projects'].each do |project|
+        source, _ = sources.find { |name, source| project.keys.include?(name) }
+        git = project['git']
+        git = "#{sources[source]}:#{project[source]}" if source
+        project_folder = project['folder']
+        project_folder = "#{projects_root}#{project_folder}" unless project_folder.nil? || project_folder.start_with?('/')
+        project_folder ||= "#{projects_root}#{project[source]}" if source
+        next unless project_folder
+
         config.vm.provision 'shell' do |s|
-          s.inline = "mkdir -p $(dirname #{project['folder']}) && chown -R vagrant:vagrant $(dirname #{project['folder']}) && cd $(dirname #{project['folder']}) && if [ ! -d #{project['folder']} ]; then su -c 'git clone #{project['git']}' vagrant; fi"
+          s.inline = "mkdir -p $(dirname #{project_folder}) && chown -R vagrant:vagrant $(dirname #{project_folder}) && cd $(dirname #{project_folder}) && if [ ! -d #{project_folder} ]; then su -c 'git clone #{git}' vagrant; else su -c 'cd #{project_folder} && git pull' vagrant ;fi"
         end
       end
     end
@@ -92,6 +112,12 @@ class Redhouse
     if settings.include? 'sites'
       domains = []
 
+      sites_root = nil
+      if settings.include? 'sites_root'
+        sites_root = settings['sites_root']
+        sites_root = "#{sites_root}/" unless sites_root.end_with?('/')
+      end
+
       settings['sites'].each do |site|
         domains.push(site['map'])
 
@@ -113,7 +139,7 @@ class Redhouse
           s.path = script_dir + "/site-types/#{type}.sh"
           s.args = [
               site['map'], # $1
-              site['to'], # $2
+              "#{sites_root}#{site['to']}", # $2
               site['port'] ||= port, # $3
           ]
         end
