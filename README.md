@@ -37,7 +37,7 @@ Here's a list of things:
 
 * PostgreSQL 12
 * NodeJS 12
-* rbenv + ruby-build and Ruby 2.6.5
+* rbenv + ruby-build and Ruby 2.7.2
 * nginx
 * SQLite
 * InfluxDB
@@ -60,7 +60,7 @@ sites:
   - map: redhouse.dev
     to: /home/vagrant/code/redhouse/public
     port: 3001
-    ruby: 2.6.5
+    ruby: 2.7.2
 
 databases:
   - redhouse_development
@@ -74,18 +74,23 @@ to the directory to run the Rails project with 'bin/rails s -p 3001'. Provided t
 added the domain in your local hosts file to point to the IP address of the vagrant box (also
 specified in redhouse.yaml) you can visit https://redhouse.dev to access your Rails project.
 
+If you specify a ruby version that is not yet installed with any of the sites it will get installed
+using ruby-build during the provision step.
+
 ## Q&A
 
 ### Why the name Redhouse?
 
 Rubies are red, Laravel named its Vagrant setup project Homestead which made me think of a house 
-and that made me think of Jimi Hendrix's song "Red house"... which led to Redhouse.
+and that made me think of Jimi Hendrix's song "Red house"... which led to Redhouse. I guess I am
+just special like that :)
 
 ### Watchers on file changes are not picking changes on the shared folders. What gives?
 
 Shared filesystems such as VirtualBox's shared folders only trigger filesystem events in the box when the files are changed there. I recently found https://github.com/mhallin/vagrant-notify-forwarder, that's a vagrant plugin that forwards filesystem events from the host to the guest and it works pretty well (although sometimes it can be a bit quirky).
 
-Another way around this is to edit the files from within the VM, there are various ways to do this (vim or emacs from the shell inside the box or editing over SFTP or something like that).
+Another way around this is to edit the files from within the VM which is how I work most of the 
+time, there are various ways to do this (vim or emacs from the shell inside the box or editing over SFTP or something like that).
 
 ### How can I contribute?
 
