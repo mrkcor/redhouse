@@ -5,6 +5,15 @@ class Redhouse
     config.ssh.forward_agent = true
     config.vm.network :private_network, ip: settings['ip'] ||= '192.168.10.42'
 
+    config.vm.provision 'shell' do |s|
+      s.inline = "echo '' > /home/vagrant/.pam_environment"
+    end
+
+    settings['environment'] ||= {}
+    config.vm.provision 'shell' do |s|
+      s.inline = "echo 'IP_ADDRESS=#{settings['ip']}\n#{settings['environment'].map { |k, v| "#{k}=#{v}" }.join("\n")}' > /home/vagrant/.pam_environment"
+    end
+
     # Configure Local Variable To Access Scripts From Remote Location
     script_dir = File.dirname(__FILE__)
 
