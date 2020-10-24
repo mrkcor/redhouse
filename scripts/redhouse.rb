@@ -26,6 +26,23 @@ class Redhouse
       end
     end
 
+    if settings.include? 'ssh_port_forwards'
+      ssh_extra_args = []
+
+      settings['ssh_port_forwards'].each do |ssh_port_forward|
+        ssh_port_forward_type = ssh_port_forward['direction'] || 'host'
+        guest_port            = ssh_port_forward['guest_port'] || ssh_port_forward['port']
+        host_hostname         = ssh_port_forward['host_name'] || 'localhost'
+        host_port             = ssh_port_forward['host_port'] || ssh_port_forward['port']
+
+        ssh_extra_args << '-R' if ssh_port_forward_type == 'host'
+        ssh_extra_args << '-L' if ssh_port_forward_type != 'host'
+        ssh_extra_args << "#{guest_port}:#{host_hostname}:#{host_port}"
+      end
+
+      config.ssh.extra_args = ssh_extra_args
+    end
+
     if settings.include? 'key_scan'
       settings['key_scan'].each do |hostname|
         config.vm.provision 'shell' do |s|
