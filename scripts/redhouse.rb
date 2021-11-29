@@ -170,7 +170,7 @@ class Redhouse
           ]
         end
 
-        site['ruby'] ||= '2.7.2'
+        site['ruby'] ||= '2.7.5'
         config.vm.provision 'shell', path: script_dir + '/install-ruby.sh', args: [site['ruby']]
 
         config.vm.provision 'shell' do |s|
