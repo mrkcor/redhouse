@@ -25,7 +25,7 @@ Once the provisioning is complete there will be a .pem file in the redhouse dire
 browser as a trusted root certificate you will not get warnings for the certificates
 generated for the sites that you specified in redhouse.yaml.
 
-PostgreSQL 12 is installed, any databases mentioned in the 'databases' section of the 
+PostgreSQL 14 is installed, any databases mentioned in the 'databases' section of the 
 redhouse.yaml file will be created within it for you. 
 
 To connect to PostgreSQL no password is needed as long as you are connecting through the
