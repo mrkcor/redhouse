@@ -35,9 +35,9 @@ unix socket or localhost. The roles 'vagrant' and 'root' exist for you to connec
 
 Here's a list of things:
 
-* PostgreSQL 12
+* PostgreSQL 14
 * NodeJS 12
-* rbenv + ruby-build and Ruby 2.7.2
+* rbenv + ruby-build and Ruby 2.7.4
 * nginx
 * SQLite
 * InfluxDB
