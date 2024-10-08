@@ -1,3 +1,7 @@
+# Archived Repository
+
+This repository has been **archived** and is no longer actively maintained.
+
 # Introduction
 
 This repository contains the [Vagrant](https://www.vagrantup.com/) setup for the Redhouse 
