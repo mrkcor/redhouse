@@ -1,6 +1,8 @@
 # Archived Repository
 
-This repository has been **archived** and is no longer actively maintained.
+This repository has been **archived** and is no longer actively maintained. The prebuilt Vagrant box is no longer 
+available, if you are interested in using a solution like Redhouse you can use this repository and the 
+redhouse-packer repository as a basis to build your own.
 
 # Introduction
 
